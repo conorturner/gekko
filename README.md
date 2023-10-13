@@ -40,3 +40,17 @@ class MartingaleGekko(Gekko):
 
         self.market.open(self.epic, self.current_direction, size=self.current_size)
 ```
+
+## Running the System
+
+Two scripts must be started for the algorithms to begin trading, first multiplex.py is used to proxy the stream of prices from IG, allowing N children to connect to a single stream.
+
+```bash
+python3 multiplex.py
+```
+
+Next the examples can be run using the following command. To add more strategies they must be added to run.py.
+
+```bash
+python3 run.py
+```
