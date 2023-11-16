@@ -21,21 +21,43 @@ IG_PASS = os.environ.get('IG_PASS')
 async def main():
     log = logging.getLogger('Create History')
     epics = [
-        "CC.D.RB.UMP.IP", "CC.D.HO.UMP.IP", "CC.D.CL.UMP.IP",  # US oil derivatives
-        "CC.D.LCO.UMP.IP",  # Brent Crude
-        "CS.D.CFPGOLD.CFP.IP",  # Gold
-        "CC.D.NG.UMP.IP",  # US Natural Gas
-        "CS.D.GBPUSD.MINI.IP",  # GBPUSD Mini
-        "CS.D.EURUSD.MINI.IP",  # EURUSD Mini
-        "CS.D.USDJPY.MINI.IP",  # USDJPY Mini
-        "CS.D.USDCHF.MINI.IP",  # USDCHF Mini
-        "CS.D.USDCAD.MINI.IP",  # USDCAD Mini
-        "CS.D.AUDGBP.MINI.IP",  # AUD/GBP Mini
-        "CS.D.AUDUSD.MINI.IP",  # AUDUSD Mini
-        "IX.D.DAX.IFS.IP",  # DAX Germany 40
+        "CC.D.LCO.UMP.IP",
+        "CC.D.CL.UMP.IP",
+        "CC.D.RB.UMP.IP",
+        "CC.D.HO.UMP.IP",
+        "CC.D.C.UMP.IP",
+        "CC.D.BO.UMP.IP",
+        "CC.D.W.UMP.IP",
+        "CC.D.NG.UMP.IP",
+        "CS.D.COPPER.CFD.IP",
+        "CS.D.CFDGOLD.CFDGC.IP",
+        "IR.D.FLG.FWM1.IP",
+        "IR.D.10YEAR100.FWM2.IP",
+        "IR.D.FGBL.FN2B.IP",
+        "IR.D.JGB.FWM2.IP",
+        "IR.D.FOAT.FWM2.IP",
+        "IR.D.FBTS.FWM2.IP",
+        "CS.D.GBPUSD.MINI.IP",
+        "CS.D.EURUSD.MINI.IP",
+        "CS.D.USDJPY.MINI.IP",
+        "CS.D.AUDUSD.MINI.IP",
+        "CS.D.EURGBP.MINI.IP",
+        "CS.D.EURJPY.MINI.IP",
+        "CS.D.USDCAD.MINI.IP",
+        "CC.D.DX.UMP.IP",
+        "CS.D.EURCHF.MINI.IP",
+        "IX.D.NASDAQ.IFS.IP",
+        "IX.D.FTSE.IFM.IP",
+        "IX.D.DAX.IFS.IP",
+        "IX.D.SPTRD.IFS.IP",
+        "CC.D.VIX.UMP.IP",
+        "IX.D.HSTECH.IFU.IP",
+        "IX.D.XINHUA.IFM.IP",
+        "CC.D.VSTOXX.UNC.IP",
+        "CS.D.CRYPTOB10.CFD.IP",
     ]
 
-    assert len(epics) < 40
+    assert len(epics) <= 40
 
     log.info(f'Streaming {len(epics)} instruments.')
 
@@ -43,7 +65,7 @@ async def main():
         IG_USER, IG_PASS, IG_API_KEY, "DEMO",
         acc_number=IG_ACCOUNT
     )
-    async with aiofiles.open('test/history.jline', "w") as out:
+    async with aiofiles.open('test/40-instruments.jline', "w") as out:
         i = 0
         byte_count = 0
         async for msg in stream_ig(epics, ig_service, parse_date=False):
