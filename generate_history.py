@@ -16,6 +16,7 @@ IG_API_KEY = os.environ.get('IG_API_KEY')
 IG_ACCOUNT = os.environ.get('IG_ACCOUNT')
 IG_USER = os.environ.get('IG_USER')
 IG_PASS = os.environ.get('IG_PASS')
+IG_ENV = os.environ.get('IG_ENV')
 
 
 async def main():
@@ -33,7 +34,7 @@ async def main():
         "CS.D.CFDGOLD.CFDGC.IP",
         "IR.D.FLG.FWM1.IP",
         "IR.D.10YEAR100.FWM2.IP",
-        "IR.D.FGBL.FN2B.IP",
+        # "IR.D.FGBL.FN2B.IP",
         "IR.D.JGB.FWM2.IP",
         "IR.D.FOAT.FWM2.IP",
         "IR.D.FBTS.FWM2.IP",
@@ -44,6 +45,7 @@ async def main():
         "CS.D.EURGBP.MINI.IP",
         "CS.D.EURJPY.MINI.IP",
         "CS.D.USDCAD.MINI.IP",
+        "CS.D.CRYPTOB10.CFD.IP",
         "CC.D.DX.UMP.IP",
         "CS.D.EURCHF.MINI.IP",
         "IX.D.NASDAQ.IFS.IP",
@@ -54,7 +56,6 @@ async def main():
         "IX.D.HSTECH.IFU.IP",
         "IX.D.XINHUA.IFM.IP",
         "CC.D.VSTOXX.UNC.IP",
-        "CS.D.CRYPTOB10.CFD.IP",
     ]
 
     assert len(epics) <= 40
@@ -62,7 +63,7 @@ async def main():
     log.info(f'Streaming {len(epics)} instruments.')
 
     ig_service = IGService(
-        IG_USER, IG_PASS, IG_API_KEY, "DEMO",
+        IG_USER, IG_PASS, IG_API_KEY, IG_ENV,
         acc_number=IG_ACCOUNT
     )
     async with aiofiles.open('test/40-instruments.jline', "w") as out:
