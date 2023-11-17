@@ -66,7 +66,7 @@ async def main():
         IG_USER, IG_PASS, IG_API_KEY, IG_ENV,
         acc_number=IG_ACCOUNT
     )
-    async with aiofiles.open('test/40-instruments.jline', "w") as out:
+    async with aiofiles.open('test/40-instruments-live.jline', "w") as out:
         i = 0
         byte_count = 0
         async for msg in stream_ig(epics, ig_service, parse_date=False):
